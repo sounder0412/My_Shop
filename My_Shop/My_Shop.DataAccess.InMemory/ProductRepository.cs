@@ -17,7 +17,7 @@ namespace My_Shop.DataAccess.InMemory
         public ProductRepository()
         {
             products = cache["products"] as List<Products>;
-            if(products == null)
+            if (products == null)
             {
                 products = new List<Products>();
             }
@@ -26,7 +26,7 @@ namespace My_Shop.DataAccess.InMemory
         {
             cache["products"] = products;
         }
-        
+
         public void Insert(Products p)
         {
             products.Add(p);
@@ -35,8 +35,8 @@ namespace My_Shop.DataAccess.InMemory
         public void Update(Products product)
         {
             Products productToUpdate = products.Find(p => p.Id == product.Id);
-            
-            if(productToUpdate != null)
+
+            if (productToUpdate != null)
             {
                 productToUpdate = product;
             }
@@ -49,8 +49,8 @@ namespace My_Shop.DataAccess.InMemory
         public Products Find(string Id)
         {
             Products product = products.Find(p => p.Id == Id);
-            
-            if(product != null)
+
+            if (product != null)
             {
                 return product;
             }
@@ -78,6 +78,4 @@ namespace My_Shop.DataAccess.InMemory
             }
         }
     }
-
-    
 }

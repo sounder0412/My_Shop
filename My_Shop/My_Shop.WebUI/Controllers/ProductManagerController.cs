@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Web;
 using System.Web.ModelBinding;
@@ -15,10 +16,12 @@ namespace My_Shop.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         ProductRepository context;
+        ProductCategoryRepository productCateogries;
 
         public ProductManagerController()
         {
             context = new ProductRepository();
+            productCateogries = new ProductCategoryRepository();
 
         }
         // GET: ProductManager
@@ -30,8 +33,10 @@ namespace My_Shop.WebUI.Controllers
 
         public ActionResult Create()
         {
-            Products product = new Products();
-            return View(product);
+            ProductManagerViewModels viewModel = new ProductManagerViewModels();
+            viewModel.Products = new Products();
+            viewModel.ProductsCategories = productCateogries.Collection();
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -59,7 +64,10 @@ namespace My_Shop.WebUI.Controllers
             }
             else
             {
-                return View(product);
+                ProductManagerViewModels viewModels = new ProductManagerViewModels();
+                viewModels.Products = product;
+                viewModels.ProductsCategories = productCateogries.Collection();
+                return View(viewModels);
             }
         }
 
