@@ -16,5 +16,7 @@ namespace My_Shop.DataAcess.SQL
         }
         public DbSet<Products> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<BasketItem> BasketItem { get; set; }
     }
 }
