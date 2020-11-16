@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using My_Shop.Core.Contracts;
 using My_Shop.Core.Models;
 using My_Shop.DataAccess.InMemory;
 
@@ -14,14 +15,14 @@ namespace My_Shop.WebUI.Controllers
 
         public ProductCategoryManagerController(IRepository<ProductCategory> context)
         {
-            context = context;
+            this.context = context;
 
         }
         // GET: ProductManager
         public ActionResult Index()
         {
-            List<ProductCategory> productCategories = context.Collection().ToList();
-            return View(productCategories);
+            List<ProductCategory> productCatagories = context.Collection().ToList();
+            return View(productCatagories);
         }
 
         public ActionResult Create()
