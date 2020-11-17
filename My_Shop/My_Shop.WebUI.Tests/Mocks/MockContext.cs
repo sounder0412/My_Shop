@@ -1,35 +1,26 @@
 ﻿using My_Shop.Core.Contracts;
 using My_Shop.Core.Models;
-using My_Shop.DataAccess.InMemory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Caching;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace My_Shop.DataAccess.InMemory
+namespace My_Shop.WebUI.Tests.Mocks
 {
-    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
+    public class MockContext<T> :IRepository<T> where T : BaseEntity
     {
-        ObjectCache cache = MemoryCache.Default;
         List<T> items;
         string className;
 
-        public InMemoryRepository()
+        public MockContext()
         {
-            className = typeof(T).Name;
-            items = cache[className] as List<T>;
-            if (items == null)
-            {
-                items = new List<T>();
-            }
+            items = new List<T>();
         }
 
         public void Commit()
         {
-            cache[className] = items;
+            return;
         }
 
         public void Insert(T t)
